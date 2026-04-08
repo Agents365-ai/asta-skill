@@ -1,9 +1,11 @@
 ---
 name: asta-skill
 description: Use when searching academic papers via Ai2 Asta (Semantic Scholar corpus) through the Asta MCP server. Triggers on academic search, paper lookup, citation traversal, author search, or snippet search when the Asta MCP server is configured. Works with Claude Code, Codex, Hermes, OpenClaw, Windsurf, Cursor, and any MCP-compatible agent.
-version: 0.1.0
+license: MIT
 homepage: https://github.com/Agents365-ai/asta-skill
-metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭"}}
+compatibility: Requires an MCP-capable host (Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw) with the Asta MCP server registered at https://asta-tools.allen.ai/mcp/v1 using an x-api-key header. The skill does not make HTTP calls itself.
+platforms: [macos, linux, windows]
+metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"author":"Agents365-ai","version":"0.2.0"}
 ---
 
 # Asta MCP — Academic Paper Search
