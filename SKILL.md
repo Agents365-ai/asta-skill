@@ -25,12 +25,23 @@ Before invoking any tool, verify the Asta MCP server is registered in the host a
 | Broad topic search | `search_papers_by_relevance` | Supports venue + date filters |
 | Known paper title | `search_paper_by_title` | Optional venue restriction |
 | Known DOI / arXiv / PMID / CorpusId / MAG / ACL / SHA / URL | `get_paper` | Single-paper lookup |
-| Who cited paper X | `get_citations` | Citation traversal with filters |
+| Multiple known IDs at once | `get_paper_batch` | Batch lookup — prefer over N sequential `get_paper` calls |
+| Who cited paper X | `get_citations` | Citation traversal with filters, paginated |
 | Find author by name | `search_authors_by_name` | Returns profile info |
 | An author's publications | `get_author_papers` | Pass author id from previous call |
 | Find passages mentioning X | `snippet_search` | ~500-word excerpts from paper bodies |
 
 All tools accept **date-range filters** and **field selection** — pass them whenever the user's intent constrains scope (e.g., "recent", "since 2022", "at NeurIPS").
+
+### ⚠️ `fields` parameter — avoid context blowups
+
+`get_paper` / `get_paper_batch` accept a `fields` string. **Never request `citations` or `references`** via `fields` — a single highly-cited paper (e.g. *Attention Is All You Need*) returns 200k+ characters and will overflow the agent's context window. Use the dedicated `get_citations` tool instead (it paginates).
+
+Safe default `fields` for `get_paper`:
+```
+title,year,authors,venue,tldr,url,abstract
+```
+Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when needed.
 
 ## Workflow Patterns
 
