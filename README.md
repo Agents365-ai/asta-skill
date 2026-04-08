@@ -1,52 +1,77 @@
-# asta-skill 🔭
+# asta-skill — Semantic Scholar via Ai2 Asta MCP 🔭
 
-通过 **Ai2 Asta MCP Server** 让任意支持 MCP 的 agent(Claude Code、Codex、Hermes、Cursor、Windsurf、OpenClaw 等)使用 Semantic Scholar 学术语料库。
+[中文文档](README_CN.md) | [Asta MCP Overview](https://allenai.org/asta/resources/mcp) | [Request API Key](https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm)
 
-- **MCP 端点:** `https://asta-tools.allen.ai/mcp/v1`
-- **传输:** streamable HTTP
-- **认证:** `x-api-key` header([申请 API key](https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm))
+## What it does
 
-## 它是什么
+- **Search** the Semantic Scholar academic corpus by keyword, title, author, or full-text snippet
+- **Look up** a paper from any ID (DOI, arXiv, PMID, PMCID, CorpusId, MAG, ACL, SHA, URL)
+- **Traverse citations** — find who cited a given paper, with filtering and pagination
+- **Batch-lookup** multiple papers in one call via `get_paper_batch`
+- **Snippet search** — retrieve ~500-word passages from paper bodies for evidence grounding
+- **Author discovery** — find researchers and list their publications
+- **Zero-code integration** — the skill is a pure instruction pack; all I/O goes through the Asta MCP server
+- Triggers automatically whenever the user asks for papers, citations, academic search, or literature discovery and Asta tools are registered
 
-`asta-skill` 是一个**零代码的 agent 技能包** —— 它本身不发请求,而是告诉 agent:
+## Multi-Platform Support
 
-1. Asta MCP 提供了哪些工具
-2. 不同用户意图该调用哪个工具
-3. 如何把工具组合成 topic discovery / 引用扩展 / 作者深挖 / 证据检索等工作流
-4. 如何在各个 host 里注册 Asta MCP server
+Works with any agent that speaks MCP and any host that loads [Agent Skills](https://agentskills.io):
 
-## Asta 提供的工具
+| Platform | Status | Details |
+|----------|--------|---------|
+| **Claude Code** | ✅ Full support | Native SKILL.md + `claude mcp add` registration |
+| **Codex** | ✅ Full support | MCP entry in `~/.codex/config.toml` |
+| **Cursor / Windsurf / Hermes** | ✅ Full support | Standard `mcpServers` JSON block |
+| **OpenClaw** | ✅ Full support | `metadata.openclaw` namespace + MCP config |
+| **SkillsMP** | ✅ Indexed | GitHub topics configured |
 
-| 工具 | 用途 |
-|---|---|
-| `get_paper` | 按 DOI / arXiv / PMID / PMCID / CorpusId / MAG / ACL / SHA / URL 查论文 |
-| `search_papers_by_relevance` | 关键词宽泛搜索(支持 venue + 日期过滤) |
-| `search_paper_by_title` | 按标题查找 |
-| `get_citations` | 谁引用了某篇论文 |
-| `search_authors_by_name` | 按姓名找作者 |
-| `get_author_papers` | 查作者的所有论文 |
-| `snippet_search` | 从论文正文中检索 ~500 词的相关段落 |
+## Comparison
 
-## 安装
+### vs. `semanticscholar-skill` (our REST-based sibling)
 
-先申请 API key 并设置环境变量:
+| Capability | `semanticscholar-skill` | `asta-skill` |
+|---|---|---|
+| Transport | Python + direct REST (`s2.py`) | MCP (streamable HTTP) |
+| Host requirement | Python + `S2_API_KEY` | Host with MCP support |
+| Auth variable | `S2_API_KEY` | `ASTA_API_KEY` (via `x-api-key`) |
+| Best for | Scripted batch workflows, custom filters | Zero-code agent integration |
+| Works in Cursor / Windsurf out of the box | ❌ | ✅ |
 
-```bash
-export ASTA_API_KEY="..."
-```
+### vs. no skill (native agent)
+
+| Feature | Native agent | This skill |
+|---|---|---|
+| Knows Asta endpoint & `x-api-key` header | ❌ | ✅ |
+| Intent → tool decision table | ❌ | ✅ |
+| Workflow patterns (discovery / seed expansion / author / evidence) | ❌ | ✅ |
+| Warns against context-blowing `fields=citations` | ❌ | ✅ |
+| Install recipes for every MCP host | ❌ | ✅ |
+
+## Prerequisites
+
+- An agent host with MCP support (Claude Code, Codex, Cursor, Windsurf, OpenClaw, etc.)
+- An Asta API key — [request here](https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm)
+
+  ```bash
+  export ASTA_API_KEY=xxxxxxxxxxxxxxxx
+  ```
+
+## MCP Server Registration
+
+Register the Asta MCP server with your host **before** installing the skill.
 
 ### Claude Code
 
 ```bash
-claude mcp add asta \
-  --transport http \
-  --url https://asta-tools.allen.ai/mcp/v1 \
-  --header "x-api-key: $ASTA_API_KEY"
+claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
+  -H "x-api-key: $ASTA_API_KEY"
 ```
+
+Then restart Claude Code so the MCP tools load at session start.
 
 ### Codex CLI
 
-编辑 `~/.codex/config.toml`:
+Edit `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.asta]
@@ -55,7 +80,7 @@ url = "https://asta-tools.allen.ai/mcp/v1"
 headers = { "x-api-key" = "${ASTA_API_KEY}" }
 ```
 
-### Cursor / Windsurf / Hermes / 其他 MCP 客户端
+### Cursor / Windsurf / Hermes / other MCP clients
 
 ```json
 {
@@ -68,35 +93,132 @@ headers = { "x-api-key" = "${ASTA_API_KEY}" }
 }
 ```
 
-### 安装 skill 本体
+## Skill Installation
 
-| 平台 | 路径 |
+### Claude Code
+
+```bash
+# Global (available in all projects)
+git clone https://github.com/Agents365-ai/asta-skill.git ~/.claude/skills/asta-skill
+
+# Project-level
+git clone https://github.com/Agents365-ai/asta-skill.git .claude/skills/asta-skill
+```
+
+### Codex
+
+```bash
+git clone https://github.com/Agents365-ai/asta-skill.git ~/.codex/skills/asta-skill
+```
+
+### OpenClaw
+
+```bash
+git clone https://github.com/Agents365-ai/asta-skill.git ~/.openclaw/skills/asta-skill
+
+# Project-level
+git clone https://github.com/Agents365-ai/asta-skill.git skills/asta-skill
+```
+
+### SkillsMP
+
+```bash
+skills install asta-skill
+```
+
+### Installation paths summary
+
+| Platform | Global path | Project path |
+|----------|-------------|--------------|
+| Claude Code | `~/.claude/skills/asta-skill/` | `.claude/skills/asta-skill/` |
+| Codex | `~/.codex/skills/asta-skill/` | N/A |
+| OpenClaw | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
+| SkillsMP | N/A (installed via CLI) | N/A |
+
+## Usage
+
+Just describe what you want:
+
+```
+> Use Asta to get the paper with DOI 10.48550/arXiv.1706.03762
+
+> Search Asta for recent papers on mixture-of-experts at NeurIPS since 2023
+
+> Who cited "Attention Is All You Need"? Show me the top 20 by citation count
+
+> Find snippets in the Asta corpus that mention "flash attention latency"
+
+> Look up Yann LeCun on Asta and list his 2024 papers
+```
+
+The skill picks the right Asta tool, attaches safe `fields`, and follows the documented workflow patterns.
+
+## Available Asta Tools
+
+| Tool | Purpose |
 |---|---|
-| Claude Code(全局) | `~/.claude/skills/asta-skill/` |
-| Claude Code(项目) | `.claude/skills/asta-skill/` |
-| OpenClaw(全局) | `~/.openclaw/skills/asta-skill/` |
-| OpenClaw(项目) | `skills/asta-skill/` |
+| `get_paper` | Single-paper lookup by any supported ID |
+| `get_paper_batch` | Batch lookup of multiple IDs in one call |
+| `search_papers_by_relevance` | Broad keyword search with venue + date filters |
+| `search_paper_by_title` | Title-based lookup |
+| `get_citations` | Paginated citation traversal |
+| `search_authors_by_name` | Author profile search |
+| `get_author_papers` | All papers by a given author |
+| `snippet_search` | ~500-word passages from paper bodies |
 
-把本仓库克隆或复制到上述任一路径即可。
+## Files
 
-## 验证
+- `SKILL.md` — **the only required file**. Loaded by all hosts as the skill instructions.
+- `README.md` — this file (English, displayed on GitHub homepage)
+- `README_CN.md` — Chinese documentation
 
-让 agent 执行:
+## Verification
 
-> "用 Asta 查一下 DOI `10.48550/arXiv.1706.03762` 这篇论文。"
+After registering the MCP server and restarting your host, ask:
 
-应返回 *Attention Is All You Need* 的元数据。
+> "Use Asta to get the paper ARXIV:1706.03762 with fields title,year,authors,venue,tldr"
 
-## 与 `semanticscholar-skill` 的区别
+A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al., with TLDR.
 
-| | semanticscholar-skill | asta-skill |
-|---|---|---|
-| 传输 | Python + REST | MCP(streamable HTTP) |
-| 运行依赖 | Python + `S2_API_KEY` | Host 支持 MCP |
-| 适用场景 | 脚本化批处理、复杂过滤 | 零代码 agent 集成 |
+## Known Limitations
 
-两者共享 Semantic Scholar 语料库,使用哪个取决于 host 是否支持 MCP。
+- **`fields=citations` / `fields=references` blows up context** — a single highly-cited paper returns 200k+ characters. Use the dedicated `get_citations` tool (which paginates) instead. The SKILL.md warns against this explicitly.
+- **API key required for production use** — unauthenticated access hits strict rate limits fast
+- **Author disambiguation** — common names collide; always inspect affiliations in `search_authors_by_name` before calling `get_author_papers`
+- **MCP loads at session start** — if you register the server mid-session, restart your host to pick up the new tools
+- **Abstract availability** — not every paper in the corpus has a full abstract; use `snippet_search` or `tldr` as fallback
 
 ## License
 
 MIT
+
+## Support
+
+If this skill helps you, consider supporting the author:
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/Agents365-ai/images_payment/main/qrcode/wechat-pay.png" width="180" alt="WeChat Pay">
+      <br>
+      <b>WeChat Pay</b>
+    </td>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/Agents365-ai/images_payment/main/qrcode/alipay.png" width="180" alt="Alipay">
+      <br>
+      <b>Alipay</b>
+    </td>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/Agents365-ai/images_payment/main/qrcode/buymeacoffee.png" width="180" alt="Buy Me a Coffee">
+      <br>
+      <b>Buy Me a Coffee</b>
+    </td>
+  </tr>
+</table>
+
+## Author
+
+**Agents365-ai**
+
+- Bilibili: https://space.bilibili.com/441831884
+- GitHub: https://github.com/Agents365-ai
