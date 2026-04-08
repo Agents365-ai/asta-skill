@@ -5,7 +5,7 @@ license: MIT
 homepage: https://github.com/Agents365-ai/asta-skill
 compatibility: Requires an MCP-capable host (Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw) with the Asta MCP server registered at https://asta-tools.allen.ai/mcp/v1 using an x-api-key header. The skill does not make HTTP calls itself.
 platforms: [macos, linux, windows]
-metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"author":"Agents365-ai","version":"0.2.0"}
+metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"author":"Agents365-ai","version":"0.2.1"}
 ---
 
 # Asta MCP — Academic Paper Search
@@ -152,6 +152,23 @@ Add to the client's MCP server config file:
   }
 }
 ```
+
+### LM Studio
+
+LM Studio 0.3.17+ supports remote MCP servers. Edit `~/.lmstudio/mcp.json` (macOS/Linux) or `%USERPROFILE%\.lmstudio\mcp.json` (Windows) — or in the app: **Program** tab → **Install > Edit mcp.json**:
+
+```json
+{
+  "mcpServers": {
+    "asta": {
+      "url": "https://asta-tools.allen.ai/mcp/v1",
+      "headers": { "x-api-key": "<YOUR_API_KEY>" }
+    }
+  }
+}
+```
+
+Only models with "Tool Use: Supported" in LM Studio's model loader will be able to call Asta tools. Recommended: Qwen 2.5 / 3 Instruct (7B+), Llama 3.1 / 3.3 Instruct (8B+), Mistral / Mixtral Instruct.
 
 ### OpenClaw
 

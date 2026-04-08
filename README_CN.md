@@ -22,6 +22,7 @@
 | **Claude Code** | ✅ 完全支持 | 原生 SKILL.md + `claude mcp add` 注册 |
 | **Codex** | ✅ 完全支持 | 在 `~/.codex/config.toml` 中配置 MCP |
 | **Cursor / Windsurf / Hermes** | ✅ 完全支持 | 标准 `mcpServers` JSON 配置 |
+| **LM Studio** | ✅ 0.3.17+ | 通过 `~/.lmstudio/mcp.json` 远程 MCP(需模型支持 tool use) |
 | **OpenClaw** | ✅ 完全支持 | `metadata.openclaw` 命名空间 + MCP 配置 |
 | **SkillsMP** | ✅ 已收录 | GitHub topics 已配置 |
 
@@ -92,6 +93,23 @@ headers = { "x-api-key" = "${ASTA_API_KEY}" }
   }
 }
 ```
+
+### LM Studio
+
+LM Studio 0.3.17+ 支持远程 MCP。编辑 `~/.lmstudio/mcp.json`(macOS/Linux)或 `%USERPROFILE%\.lmstudio\mcp.json`(Windows),也可以在应用内:**Program** 标签页 → **Install > Edit mcp.json**:
+
+```json
+{
+  "mcpServers": {
+    "asta": {
+      "url": "https://asta-tools.allen.ai/mcp/v1",
+      "headers": { "x-api-key": "<YOUR_API_KEY>" }
+    }
+  }
+}
+```
+
+只有在 LM Studio 模型加载界面显示 **Tool Use: Supported** 的模型才能调用 Asta 工具。推荐:Qwen 2.5 / 3 Instruct(7B+)、Llama 3.1 / 3.3 Instruct(8B+)、Mistral / Mixtral Instruct。
 
 ## 技能安装
 
