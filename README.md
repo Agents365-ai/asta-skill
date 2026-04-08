@@ -22,7 +22,6 @@ Works with any agent that speaks MCP and any host that loads [Agent Skills](http
 | **Claude Code** | ✅ Full support | Native SKILL.md + `claude mcp add` registration |
 | **Codex** | ✅ Full support | MCP entry in `~/.codex/config.toml` |
 | **Cursor / Windsurf / Hermes** | ✅ Full support | Standard `mcpServers` JSON block |
-| **LM Studio** | ✅ 0.3.17+ | Remote MCP via `~/.lmstudio/mcp.json` (requires tool-use-capable model) |
 | **OpenClaw** | ✅ Full support | `metadata.openclaw` namespace + MCP config |
 | **SkillsMP** | ✅ Indexed | GitHub topics configured |
 
@@ -93,23 +92,6 @@ headers = { "x-api-key" = "${ASTA_API_KEY}" }
   }
 }
 ```
-
-### LM Studio
-
-LM Studio 0.3.17+ supports remote MCP servers. Edit `~/.lmstudio/mcp.json` (macOS/Linux) or `%USERPROFILE%\.lmstudio\mcp.json` (Windows), or open it via **Program** tab → **Install > Edit mcp.json**:
-
-```json
-{
-  "mcpServers": {
-    "asta": {
-      "url": "https://asta-tools.allen.ai/mcp/v1",
-      "headers": { "x-api-key": "<YOUR_API_KEY>" }
-    }
-  }
-}
-```
-
-Only models with **Tool Use: Supported** in LM Studio's model loader can call Asta tools. Recommended: Qwen 2.5 / 3 Instruct (7B+), Llama 3.1 / 3.3 Instruct (8B+), Mistral / Mixtral Instruct.
 
 ## Skill Installation
 
