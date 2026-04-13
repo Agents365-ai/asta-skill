@@ -8,6 +8,7 @@ on:
       - 'SKILL.md'
       - 'agents/**'
       - 'README.md'
+      - 'README_CN.md'
 
 concurrency:
   group: clawhub-publish
