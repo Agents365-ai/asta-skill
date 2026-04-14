@@ -210,6 +210,12 @@ MCP server 给 agent 提供的是原始**工具**（函数名 + 参数 schema）
 - **MCP 在会话启动时加载** —— 会话中途注册 server 后必须重启 host 才能看到工具
 - **摘要不一定有** —— 并非所有论文都有完整摘要;可用 `snippet_search` 或 `tldr` 作为 fallback
 
+## 参与贡献
+
+欢迎提建议、报 bug、提 PR！无论是新的工作流模板、更好的默认配置、更多 MCP 主机的安装方法、文档修正，还是其他任何改进想法，都可以直接 [提 Issue](https://github.com/Agents365-ai/asta-skill/issues) 或提交 Pull Request。
+
+每一份贡献，不论大小，都能让这个技能变得更好。
+
 ## License
 
 MIT

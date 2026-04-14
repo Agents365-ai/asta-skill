@@ -210,6 +210,12 @@ Think of it like API documentation vs. the API itself: the schema tells the agen
 - **MCP loads at session start** — if you register the server mid-session, restart your host to pick up the new tools
 - **Abstract availability** — not every paper in the corpus has a full abstract; use `snippet_search` or `tldr` as fallback
 
+## Contributing
+
+Suggestions, bug reports, and pull requests are all welcome! If you have ideas to improve this skill — new workflow patterns, better defaults, additional MCP host recipes, documentation fixes, or anything else — feel free to [open an issue](https://github.com/Agents365-ai/asta-skill/issues) or submit a PR directly.
+
+This skill is community-friendly: every contribution, no matter how small, helps make it better for everyone.
+
 ## License
 
 MIT
