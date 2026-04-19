@@ -91,30 +91,10 @@ Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when need
 - **Respect rate limits.** An API key buys higher limits but not unlimited — stop expanding citation graphs beyond what the user asked for.
 - **Do not fabricate fields.** If Asta returns null `abstract` or `venue`, say so rather than inventing.
 
----
+## Handling Asta responses
 
-## Installation
-
-Quick-start (Claude Code):
-
-```bash
-export ASTA_API_KEY="..."   # request at https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm
-claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
-  -H "x-api-key: $ASTA_API_KEY"
-```
-
-For other platforms (Codex, Cursor, Windsurf, Hermes, LM Studio, OpenClaw), see the full install recipes in [README.md](README.md#mcp-server-registration).
-
-## Verification
-
-After installation, ask the agent: *"Use Asta to get the paper ARXIV:1706.03762 with fields title,year,authors,venue,tldr."* A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al. If the agent reports no Asta tools, the MCP server is not registered — re-check the config file path and restart the host.
-
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-|---|---|---|
-| `401 Unauthorized` | Missing or invalid `x-api-key` | Verify `ASTA_API_KEY` is set and header is forwarded |
-| `429 Too Many Requests` | Rate limit hit | Slow down / batch; ensure API key is attached (unauth'd limits are lower) |
-| No Asta tools visible | MCP server not registered in host | Re-run install step, restart agent |
-| Empty `abstract` | Not all corpus papers have full text | Use `snippet_search` instead, or fall back to title + TLDR |
-| Author disambiguation wrong | Common name collisions | Inspect affiliations in `search_authors_by_name` before calling `get_author_papers` |
+| Situation | What to do |
+|---|---|
+| Empty `abstract` | Not all corpus papers have full text — use `snippet_search`, or fall back to title + TLDR |
+| Author disambiguation uncertain | Inspect affiliations in `search_authors_by_name` results before calling `get_author_papers` |
+| `429 Too Many Requests` | Back off; batch with `get_paper_batch` instead of sequential `get_paper` calls |
