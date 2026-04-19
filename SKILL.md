@@ -91,19 +91,6 @@ Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when need
 - **Respect rate limits.** An API key buys higher limits but not unlimited — stop expanding citation graphs beyond what the user asked for.
 - **Do not fabricate fields.** If Asta returns null `abstract` or `venue`, say so rather than inventing.
 
-## Relationship to `semanticscholar-skill`
-
-Both wrap the Semantic Scholar corpus, but target different runtimes:
-
-| | `semanticscholar-skill` | `asta-skill` |
-|---|---|---|
-| Transport | Python + direct REST (`s2.py`) | MCP (streamable HTTP) |
-| Host needs | `S2_API_KEY` + Python | Asta MCP registered in host |
-| Best for | Scripted batch workflows, custom filters | Zero-code agent integration (Claude Code, Codex, Cursor, Windsurf, OpenClaw) |
-| Auth | `S2_API_KEY` | `ASTA_API_KEY` via `x-api-key` header |
-
-Use `asta-skill` when the host agent supports MCP; fall back to `semanticscholar-skill` for scripted/pipeline work.
-
 ---
 
 ## Installation
