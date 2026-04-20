@@ -22,7 +22,8 @@
 | **Claude Code** | ✅ 完全支持 | 原生 SKILL.md + `claude mcp add` 注册 |
 | **Codex** | ✅ 完全支持 | 在 `~/.codex/config.toml` 中配置 MCP |
 | **Cursor / Windsurf / Hermes** | ✅ 完全支持 | 标准 `mcpServers` JSON 配置 |
-| **OpenClaw** | ✅ 完全支持 | `metadata.openclaw` 命名空间 + MCP 配置 |
+| **opencode** | ✅ 完全支持 | 原生 skills + `~/.config/opencode/opencode.json` 配置 MCP |
+| **OpenClaw/ClawHub** | ✅ 完全支持 | `metadata.openclaw` 命名空间 + MCP 配置 |
 | **SkillsMP** | ✅ 已收录 | GitHub topics 已配置 |
 
 ## 对比
@@ -49,7 +50,7 @@
 
 ## 前置条件
 
-- 任意支持 MCP 的 agent host(Claude Code、Codex、Cursor、Windsurf、OpenClaw 等)
+- 任意支持 MCP 的 agent host(Claude Code、Codex、Cursor、Windsurf、opencode、OpenClaw/ClawHub 等)
 - Asta API key —— [点此申请](https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm)
 
   ```bash
@@ -111,7 +112,7 @@ git clone https://github.com/Agents365-ai/asta-skill.git .claude/skills/asta-ski
 git clone https://github.com/Agents365-ai/asta-skill.git ~/.codex/skills/asta-skill
 ```
 
-### OpenClaw
+### OpenClaw/ClawHub
 
 ```bash
 git clone https://github.com/Agents365-ai/asta-skill.git ~/.openclaw/skills/asta-skill
@@ -132,7 +133,7 @@ skills install asta-skill
 |------|---------|---------|
 | Claude Code | `~/.claude/skills/asta-skill/` | `.claude/skills/asta-skill/` |
 | Codex | `~/.codex/skills/asta-skill/` | 暂无 |
-| OpenClaw | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
+| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
 | SkillsMP | 暂无(CLI 安装) | 暂无 |
 
 ## 使用方式

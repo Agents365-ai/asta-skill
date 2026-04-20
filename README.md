@@ -22,7 +22,8 @@ Works with any agent that speaks MCP and any host that loads [Agent Skills](http
 | **Claude Code** | ✅ Full support | Native SKILL.md + `claude mcp add` registration |
 | **Codex** | ✅ Full support | MCP entry in `~/.codex/config.toml` |
 | **Cursor / Windsurf / Hermes** | ✅ Full support | Standard `mcpServers` JSON block |
-| **OpenClaw** | ✅ Full support | `metadata.openclaw` namespace + MCP config |
+| **opencode** | ✅ Full support | Native skills + MCP in `~/.config/opencode/opencode.json` |
+| **OpenClaw/ClawHub** | ✅ Full support | `metadata.openclaw` namespace + MCP config |
 | **SkillsMP** | ✅ Indexed | GitHub topics configured |
 
 ## Comparison
@@ -49,7 +50,7 @@ Works with any agent that speaks MCP and any host that loads [Agent Skills](http
 
 ## Prerequisites
 
-- An agent host with MCP support (Claude Code, Codex, Cursor, Windsurf, OpenClaw, etc.)
+- An agent host with MCP support (Claude Code, Codex, Cursor, Windsurf, opencode, OpenClaw/ClawHub, etc.)
 - An Asta API key — [request here](https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm)
 
   ```bash
@@ -111,7 +112,7 @@ git clone https://github.com/Agents365-ai/asta-skill.git .claude/skills/asta-ski
 git clone https://github.com/Agents365-ai/asta-skill.git ~/.codex/skills/asta-skill
 ```
 
-### OpenClaw
+### OpenClaw/ClawHub
 
 ```bash
 git clone https://github.com/Agents365-ai/asta-skill.git ~/.openclaw/skills/asta-skill
@@ -132,7 +133,7 @@ skills install asta-skill
 |----------|-------------|--------------|
 | Claude Code | `~/.claude/skills/asta-skill/` | `.claude/skills/asta-skill/` |
 | Codex | `~/.codex/skills/asta-skill/` | N/A |
-| OpenClaw | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
+| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
 | SkillsMP | N/A (installed via CLI) | N/A |
 
 ## Usage
