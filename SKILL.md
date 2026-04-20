@@ -58,7 +58,7 @@ Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when need
 ## Workflow Patterns
 
 ### Pattern 1 — Topic Discovery
-1. `search_papers_by_relevance(query, year="2022-", venue=?)` → initial hits
+1. `search_papers_by_relevance(query, year="<current_year-5>-", venue=?)` → initial hits (compute the lower bound from today's date — e.g., in 2026 pass `year="2021-"`; adjust or drop the filter if the user asks for older work)
 2. Rank/present top N by citationCount + recency
 3. Offer follow-ups: `get_citations` on the most influential, or `snippet_search` for specific claims
 
