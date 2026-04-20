@@ -3,4 +3,4 @@
 __pycache__/
 .env
 logs/
-.last_update
+.last_version_check

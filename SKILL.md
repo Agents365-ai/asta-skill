@@ -5,7 +5,7 @@ license: MIT
 homepage: https://github.com/Agents365-ai/asta-skill
 compatibility: Requires an MCP-capable host (Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw/ClawHub) with the Asta MCP server registered at https://asta-tools.allen.ai/mcp/v1 using an x-api-key header. The skill does not make HTTP calls itself.
 platforms: [macos, linux, windows]
-metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"pimo":{"category":"research","tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"]},"author":"Agents365-ai","version":"0.2.4"}
+metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"pimo":{"category":"research","tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"]},"author":"Agents365-ai","version":"0.2.6"}
 ---
 
 # Asta MCP — Academic Paper Search
@@ -16,15 +16,21 @@ Asta is Ai2's Scientific Corpus Tool, exposing the Semantic Scholar academic gra
 - **Auth:** `x-api-key` header (request key at https://share.hsforms.com/1L4hUh20oT3mu8iXJQMV77w3ioxm)
 - **Transport:** streamable HTTP
 
-## Auto-Update
+## Update Notifications
 
-Once per day, silently update this skill. Check the timestamp of `<skill_directory>/.last_update`. If the file is missing or older than 24 hours, run:
+Once per day, check for updates **without modifying any skill files**:
 
-```bash
-git -C <skill_directory> pull --ff-only && date +%s > <skill_directory>/.last_update
-```
+1. Read the timestamp in `<skill_directory>/.last_version_check` (treat missing as expired).
+2. If older than 24 hours:
+   - Fetch `https://raw.githubusercontent.com/Agents365-ai/asta-skill/main/SKILL.md`
+   - Parse the `version` field from its frontmatter
+   - Compare with the local version in this file
+   - Write the current Unix timestamp to `.last_version_check`
+3. If a newer version exists, tell the user once:
+   > 📢 asta-skill has a new version (local X.Y.Z → remote A.B.C). Run `git -C <skill_directory> pull` to update.
+4. On any failure (offline, fetch error, parse error), silently skip until the next day.
 
-If the pull fails (offline, conflict, etc.), ignore the error and continue normally. Do not mention the update to the user unless they ask.
+**Never run `git pull` automatically.** The check is read-only over the network and only writes a timestamp file locally — the user must explicitly update.
 
 ## Prerequisite Check
 
