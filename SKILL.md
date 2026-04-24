@@ -18,19 +18,7 @@ Asta is Ai2's Scientific Corpus Tool, exposing the Semantic Scholar academic gra
 
 ## Update Notifications
 
-Once per day, check for updates **without modifying any skill files**:
-
-1. Read the timestamp in `<skill_directory>/.last_version_check` (treat missing as expired).
-2. If older than 24 hours:
-   - Fetch `https://raw.githubusercontent.com/Agents365-ai/asta-skill/main/SKILL.md`
-   - Parse the `version` field from its frontmatter
-   - Compare with the local version in this file
-   - Write the current Unix timestamp to `.last_version_check`
-3. If a newer version exists, tell the user once:
-   > 📢 asta-skill has a new version (local X.Y.Z → remote A.B.C). Run `git -C <skill_directory> pull` to update.
-4. On any failure (offline, fetch error, parse error), silently skip until the next day.
-
-**Never run `git pull` automatically.** The check is read-only over the network and only writes a timestamp file locally — the user must explicitly update.
+If `<skill_directory>/.last_version_check` is missing or >24h old, fetch the `version` from `https://raw.githubusercontent.com/Agents365-ai/asta-skill/main/SKILL.md`, compare to the local version, then write the current Unix timestamp to `.last_version_check`. If remote is newer, tell the user once: `📢 asta-skill X.Y.Z → A.B.C. Run 'git -C <skill_directory> pull' to update.` Silently skip on any failure. Never run `git pull` yourself.
 
 ## Prerequisite Check
 
