@@ -5,7 +5,7 @@ license: MIT
 homepage: https://github.com/Agents365-ai/asta-skill
 compatibility: Requires an MCP-capable host (Claude Code, Codex, Cursor, Windsurf, Hermes, OpenClaw/ClawHub) with the Asta MCP server registered at https://asta-tools.allen.ai/mcp/v1 using an x-api-key header. The skill does not make HTTP calls itself.
 platforms: [macos, linux, windows]
-metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"pimo":{"category":"research","tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"]},"author":"Agents365-ai","version":"0.2.6"}
+metadata: {"openclaw":{"requires":{"env":["ASTA_API_KEY"]},"emoji":"🔭","mcp":{"name":"asta","type":"http","url":"https://asta-tools.allen.ai/mcp/v1","headers":{"x-api-key":"${ASTA_API_KEY}"}}},"hermes":{"tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"],"category":"research","requires_tools":["mcp"],"related_skills":["semanticscholar-skill","zotero-research-assistant","literature-review"]},"pimo":{"category":"research","tags":["asta","semantic-scholar","academic","paper-search","citation","mcp"]},"author":"Agents365-ai","version":"0.2.7"}
 ---
 
 # Asta MCP — Academic Paper Search
@@ -37,7 +37,7 @@ Before invoking any tool, verify the Asta MCP server is registered in the host a
 | An author's publications | `get_author_papers` | Pass author id from previous call |
 | Find passages mentioning X | `snippet_search` | ~500-word excerpts from paper bodies |
 
-All tools accept **date-range filters** and **field selection** — pass them whenever the user's intent constrains scope (e.g., "recent", "since 2022", "at NeurIPS").
+Search/citation tools accept **`publication_date_range`** (format `YYYY-MM-DD:YYYY-MM-DD`; year shorthand like `"2021:"`, `":2015-01"`, `"2015:2020"` is also accepted) and **`venues`** (comma-separated) filters, plus **`fields`** for field selection — pass them whenever the user's intent constrains scope (e.g., "recent", "since 2022", "at NeurIPS").
 
 ### ⚠️ `fields` parameter — avoid context blowups
 
@@ -52,7 +52,7 @@ Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when need
 ## Workflow Patterns
 
 ### Pattern 1 — Topic Discovery
-1. `search_papers_by_relevance(query, year="<current_year-5>-", venue=?)` → initial hits (compute the lower bound from today's date — e.g., in 2026 pass `year="2021-"`; adjust or drop the filter if the user asks for older work)
+1. `search_papers_by_relevance(keyword, publication_date_range="<current_year-5>:", venues=?)` → initial hits (compute the lower bound from today's date — e.g., in 2026 pass `publication_date_range="2021:"`; adjust or drop the filter if the user asks for older work)
 2. Rank/present top N by citationCount + recency
 3. Offer follow-ups: `get_citations` on the most influential, or `snippet_search` for specific claims
 
