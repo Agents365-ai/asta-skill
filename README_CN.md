@@ -26,6 +26,7 @@
 | **OpenClaw/ClawHub** | ✅ 完全支持 | `metadata.openclaw` 命名空间 + MCP 配置 |
 | **[pi-mono](https://github.com/badlogic/pi-mono)** | ✅ 完全支持 | `metadata.pimo` 命名空间 |
 | **SkillsMP** | ✅ 已收录 | GitHub topics 已配置 |
+| **LM Studio** | ⚠️ 手动支持 | 0.3.17+ 可用 MCP 工具;skill 指令需手动粘贴到 System Prompt |
 
 ## 对比
 
@@ -94,6 +95,27 @@ headers = { "x-api-key" = "${ASTA_API_KEY}" }
   }
 }
 ```
+
+### LM Studio（手动模式）
+
+LM Studio(0.3.17+)已支持 MCP,但不会自动加载 Agent Skills。两步即可使用:
+
+1. **注册 MCP server** —— App Settings → Program → Integrations → 编辑 `mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "asta": {
+          "url": "https://asta-tools.allen.ai/mcp/v1",
+          "headers": { "x-api-key": "YOUR_ASTA_API_KEY" }
+        }
+      }
+    }
+    ```
+
+2. **手动注入技能指令** —— 把 [`SKILL.md`](SKILL.md) 的正文复制到聊天的 System Prompt,让模型按意图路由表和安全默认值调用工具。
+
+需使用**支持 function calling 的本地模型**(如 Qwen2.5-Instruct、Llama 3.1 Instruct、Mistral Nemo、GPT-OSS),纯 chat 模型无法调用 MCP 工具。
 
 ## 技能安装
 
