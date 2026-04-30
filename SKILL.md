@@ -49,6 +49,13 @@ title,year,authors,venue,tldr,url,abstract
 ```
 Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when needed.
 
+### Retrieving DOI / external IDs (undocumented but supported)
+
+Asta's official `fields` list does **not** include `externalIds`, but the field is transparently passed through to the underlying Semantic Scholar API and works in practice. Add `externalIds` to `fields` to retrieve `DOI`, `PubMed`, `PubMedCentral`, `ArXiv`, `MAG`, `DBLP`, `CorpusId`. Caveats:
+- Not all papers have a DOI — pure arXiv preprints often only return `ArXiv` + `CorpusId`.
+- `get_paper("DOI:...")` lookup is not 100% reliable; some valid DOIs return `not found`. Prefer searching by title first, then reading `externalIds` off the result.
+- Since this is undocumented, treat it as best-effort and degrade gracefully if a future Asta release drops it.
+
 ## Workflow Patterns
 
 ### Pattern 1 — Topic Discovery
@@ -92,3 +99,4 @@ Add `journal`, `publicationDate`, `fieldsOfStudy`, `isOpenAccess` only when need
 | Empty `abstract` | Not all corpus papers have full text — use `snippet_search`, or fall back to title + TLDR |
 | Author disambiguation uncertain | Inspect affiliations in `search_authors_by_name` results before calling `get_author_papers` |
 | `429 Too Many Requests` | Back off; batch with `get_paper_batch` instead of sequential `get_paper` calls |
+| Need DOI / PubMed ID / arXiv ID | Add `externalIds` to `fields` (see "Retrieving DOI" above); fall back to `ArXiv` ID when `DOI` is absent |
