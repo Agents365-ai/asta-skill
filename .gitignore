@@ -4,3 +4,4 @@ __pycache__/
 .env
 logs/
 .last_version_check
+papers/
