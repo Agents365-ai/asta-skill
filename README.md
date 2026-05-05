@@ -30,6 +30,25 @@ Works with any agent that speaks MCP and any host that loads [Agent Skills](http
 
 ## Comparison
 
+### vs. `allenai/asta-plugins` (official Ai2 plugin)
+
+Ai2 ships an [official plugin bundle](https://github.com/allenai/asta-plugins) that exposes Asta as a local CLI (`asta papers ...`) plus a multi-skill suite (literature reports, PDF OCR, experiments, document index). It and this skill solve overlapping problems with very different trade-offs:
+
+| Dimension | `allenai/asta-plugins` | `asta-skill` (this repo) |
+|---|---|---|
+| Transport | Bash subprocess → `asta` CLI → Ai2 API | MCP (streamable HTTP) |
+| Install | `uv tool install` Python 3.11 CLI + `asta auth login` | Register MCP server, clone skill |
+| Auth | `ASTA_TOKEN` (interactive Ai2 login, 30-day refresh) | `ASTA_API_KEY` via `x-api-key` header |
+| Hosts | Claude Code (`/plugin install asta`); other agents via `npx skills add` | Any MCP host: Claude Code, Codex, Cursor, Windsurf, opencode, OpenClaw, pi-mono, LM Studio |
+| Scope | Full bundle: S2 + lit-report + PDF OCR + experiments + document index | S2 lookup, citation, snippet, author only |
+| Footprint | Python toolchain + optional Docker image | Zero-code instruction pack |
+
+**Pick the official plugin if** you live in Claude Code, want the lit-report / PDF OCR / experiment skills too, and don't mind installing a Python CLI.
+
+**Pick this skill if** you want MCP-only access from a non-CC host (Codex / Cursor / Windsurf / OpenClaw), already have the Asta MCP server registered, or just need paper search / citation / author lookup without the full bundle.
+
+The two are not mutually exclusive — they just route through different transports.
+
 ### vs. `semanticscholar-skill` (our REST-based sibling)
 
 | Capability | `semanticscholar-skill` | `asta-skill` |
