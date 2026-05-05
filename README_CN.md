@@ -30,25 +30,6 @@
 
 ## 对比
 
-### vs. `allenai/asta-plugins`（Ai2 官方插件）
-
-Ai2 发布了[官方插件包](https://github.com/allenai/asta-plugins)，把 Asta 包装成本地 CLI（`asta papers ...`），并附带一组扩展技能（文献综述、PDF OCR、实验、文档索引）。本技能与官方插件解决重叠问题，但走的是两条不同的路：
-
-| 维度 | `allenai/asta-plugins` | `asta-skill`（本仓库） |
-|---|---|---|
-| 传输方式 | Bash 子进程 → `asta` CLI → Ai2 API | MCP（streamable HTTP） |
-| 安装 | `uv tool install` Python 3.11 CLI + `asta auth login` | 注册 MCP server，克隆 skill |
-| 认证 | `ASTA_TOKEN`（交互式登录，30 天过期） | `ASTA_API_KEY`（`x-api-key` 头） |
-| 宿主 | Claude Code（`/plugin install asta`）为主；其他 agent 走 `npx skills add` | 任意 MCP host：Claude Code、Codex、Cursor、Windsurf、opencode、OpenClaw、pi-mono、LM Studio |
-| 范围 | 全家桶：S2 + 文献综述 + PDF OCR + 实验 + 文档索引 | 仅 S2 查询、引用、片段、作者 |
-| 体积 | Python 工具链 + 可选 Docker 镜像 | 纯指令包，零代码 |
-
-**用官方插件**：你只用 Claude Code，想要文献综述 / PDF OCR / 实验子技能一起装，不介意安装 Python CLI。
-
-**用本技能**：你在非 Claude Code 的 MCP 宿主里（Codex / Cursor / Windsurf / OpenClaw），已经注册过 Asta MCP server，或只想要论文检索 / 引用 / 作者功能、不想装全家桶。
-
-两者并不互斥 —— 只是走的传输协议不同。
-
 ### vs. `semanticscholar-skill`(REST 版姊妹技能)
 
 | 能力 | `semanticscholar-skill` | `asta-skill` |
