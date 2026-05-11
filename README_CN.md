@@ -15,7 +15,7 @@
 
 ## 多平台支持
 
-兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见下方 [LM Studio(手动模式)](#lm-studio手动模式))。
+兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见安装指南中的 [LM Studio(手动模式)](INSTALL_MCP_CN.md#lm-studio手动模式))。
 
 ## 前置条件
 
@@ -26,87 +26,12 @@
   export ASTA_API_KEY=xxxxxxxxxxxxxxxx
   ```
 
-## MCP 服务器注册
+## 安装
 
-**先**注册 Asta MCP server,再安装技能本体。
+两步 —— 先注册 MCP server,再把技能加载到 host:
 
-### Claude Code
-
-```bash
-claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
-  -H "x-api-key: $ASTA_API_KEY"
-```
-
-然后重启 Claude Code,MCP 工具会在会话启动时加载。
-
-### Codex CLI
-
-编辑 `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.asta]
-type = "http"
-url = "https://asta-tools.allen.ai/mcp/v1"
-headers = { "x-api-key" = "${ASTA_API_KEY}" }
-```
-
-### Cursor / Windsurf / Hermes / 其他 MCP 客户端
-
-```json
-{
-  "mcpServers": {
-    "asta": {
-      "serverUrl": "https://asta-tools.allen.ai/mcp/v1",
-      "headers": { "x-api-key": "<YOUR_API_KEY>" }
-    }
-  }
-}
-```
-
-### LM Studio（手动模式）
-
-LM Studio(0.3.17+)已支持 MCP,但不会自动加载 Agent Skills。两步即可使用:
-
-1. **注册 MCP server** —— App Settings → Program → Integrations → 编辑 `mcp.json`:
-
-    ```json
-    {
-      "mcpServers": {
-        "asta": {
-          "url": "https://asta-tools.allen.ai/mcp/v1",
-          "headers": { "x-api-key": "YOUR_ASTA_API_KEY" }
-        }
-      }
-    }
-    ```
-
-2. **手动注入技能指令** —— 把 [`skills/asta-skill/SKILL.md`](skills/asta-skill/SKILL.md) 的正文复制到聊天的 System Prompt,让模型按意图路由表和安全默认值调用工具。
-
-需使用**支持 function calling 的本地模型**(如 Qwen2.5-Instruct、Llama 3.1 Instruct、Mistral Nemo、GPT-OSS),纯 chat 模型无法调用 MCP 工具。
-
-## 技能安装
-
-技能正文位于仓库内的 `skills/asta-skill/SKILL.md`。最简单的安装方式是通过插件市场。
-
-### 插件市场(推荐)
-
-```bash
-# 任意 agent(Claude Code、Cursor、Copilot 等)
-npx skills add Agents365-ai/365-skills -g
-
-# 仅 Claude Code
-/plugin marketplace add Agents365-ai/365-skills
-/plugin install asta
-```
-
-同时收录于 [SkillsMP](https://skillsmp.com/) 与 [ClawHub](https://clawhub.ai/) —— 各自通过自己的市场处理更新。
-
-### 手动克隆(任意 host)
-
-```bash
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
-cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-skill
-```
+1. **[注册 Asta MCP server](INSTALL_MCP_CN.md)** —— Claude Code、Codex、Cursor / Windsurf / Hermes、LM Studio 各 host 的具体配方。
+2. **[安装技能](INSTALL_SKILL_CN.md)** —— 插件市场(推荐)或手动克隆。
 
 ## 使用方式
 

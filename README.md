@@ -15,7 +15,7 @@
 
 ## Multi-Platform Support
 
-Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](#lm-studio-manual-mode) below).
+Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](INSTALL_MCP.md#lm-studio-manual-mode) in the install guide).
 
 ## Prerequisites
 
@@ -26,87 +26,12 @@ Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.i
   export ASTA_API_KEY=xxxxxxxxxxxxxxxx
   ```
 
-## MCP Server Registration
+## Installation
 
-Register the Asta MCP server with your host **before** installing the skill.
+Two steps — register the MCP server first, then drop the skill into your host:
 
-### Claude Code
-
-```bash
-claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
-  -H "x-api-key: $ASTA_API_KEY"
-```
-
-Then restart Claude Code so the MCP tools load at session start.
-
-### Codex CLI
-
-Edit `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.asta]
-type = "http"
-url = "https://asta-tools.allen.ai/mcp/v1"
-headers = { "x-api-key" = "${ASTA_API_KEY}" }
-```
-
-### Cursor / Windsurf / Hermes / other MCP clients
-
-```json
-{
-  "mcpServers": {
-    "asta": {
-      "serverUrl": "https://asta-tools.allen.ai/mcp/v1",
-      "headers": { "x-api-key": "<YOUR_API_KEY>" }
-    }
-  }
-}
-```
-
-### LM Studio (manual mode)
-
-LM Studio (0.3.17+) speaks MCP but does not auto-discover Agent Skills. Use it in two steps:
-
-1. **Register the MCP server** — App Settings → Program → Integrations → edit `mcp.json`:
-
-    ```json
-    {
-      "mcpServers": {
-        "asta": {
-          "url": "https://asta-tools.allen.ai/mcp/v1",
-          "headers": { "x-api-key": "YOUR_ASTA_API_KEY" }
-        }
-      }
-    }
-    ```
-
-2. **Paste the skill instructions** — copy the body of [`skills/asta-skill/SKILL.md`](skills/asta-skill/SKILL.md) into the chat's System Prompt so the model follows the intent routing and safe defaults.
-
-Use a **tool-calling-capable** local model (e.g. Qwen2.5-Instruct, Llama 3.1 Instruct, Mistral Nemo, GPT-OSS). Plain chat models cannot invoke MCP tools.
-
-## Skill Installation
-
-The skill body lives at `skills/asta-skill/SKILL.md`. The easiest path is the plugin marketplace.
-
-### Plugin marketplace (recommended)
-
-```bash
-# Any agent (Claude Code, Cursor, Copilot, etc.)
-npx skills add Agents365-ai/365-skills -g
-
-# Claude Code only
-/plugin marketplace add Agents365-ai/365-skills
-/plugin install asta
-```
-
-Also indexed on [SkillsMP](https://skillsmp.com/) and [ClawHub](https://clawhub.ai/) — each handles updates through its own marketplace.
-
-### Manual clone (any host)
-
-```bash
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
-cp -r /tmp/asta-skill/skills/asta-skill <your-host's-skills-dir>/asta-skill
-```
+1. **[Register the Asta MCP server](INSTALL_MCP.md)** — per-host recipes for Claude Code, Codex, Cursor / Windsurf / Hermes, and LM Studio.
+2. **[Install the skill](INSTALL_SKILL.md)** — plugin marketplace (recommended) or manual clone.
 
 ## Usage
 
