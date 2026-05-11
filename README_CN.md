@@ -37,10 +37,6 @@
 
 参见 [USAGE_CN.md](USAGE_CN.md) —— 包含自然语言查询示例,以及 `asta-skill` + `paper-fetch` 联用的完整流程演示(含截图)。
 
-## License
-
-MIT
-
 ## 社区
 
 加入交流群获取帮助、提问和最新动态:
@@ -87,3 +83,7 @@ MIT
 
 - Bilibili: https://space.bilibili.com/441831884
 - GitHub: https://github.com/Agents365-ai
+
+## License
+
+MIT

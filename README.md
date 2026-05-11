@@ -37,10 +37,6 @@ Two steps — register the MCP server first, then drop the skill into your host:
 
 See [USAGE.md](USAGE.md) for natural-language query examples and a chained `asta-skill` + `paper-fetch` walkthrough with screenshots.
 
-## License
-
-MIT
-
 ## Community
 
 Join us for help, Q&A, and updates:
@@ -87,3 +83,7 @@ If this skill helps you, consider supporting the author:
 
 - Bilibili: https://space.bilibili.com/441831884
 - GitHub: https://github.com/Agents365-ai
+
+## License
+
+MIT
