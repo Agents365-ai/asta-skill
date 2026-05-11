@@ -127,17 +127,8 @@ Also indexed on [SkillsMP](https://skillsmp.com/) and [ClawHub](https://clawhub.
 
 ```bash
 git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
-cp -r /tmp/asta-skill/skills/asta-skill <TARGET>
+cp -r /tmp/asta-skill/skills/asta-skill <your-host's-skills-dir>/asta-skill
 ```
-
-Pick `<TARGET>` for your host:
-
-| Host | Global | Project |
-|---|---|---|
-| Claude Code | `~/.claude/skills/asta-skill` | `.claude/skills/asta-skill` |
-| Codex | `~/.codex/skills/asta-skill` | — |
-| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill` | `skills/asta-skill` |
-| pi-mono | `~/.pimo/skills/asta-skill` | — |
 
 ### SkillsMP CLI
 

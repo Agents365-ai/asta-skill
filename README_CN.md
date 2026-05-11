@@ -127,17 +127,8 @@ npx skills add Agents365-ai/365-skills -g
 
 ```bash
 git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
-cp -r /tmp/asta-skill/skills/asta-skill <TARGET>
+cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-skill
 ```
-
-按 host 选择 `<TARGET>`:
-
-| Host | 全局 | 项目 |
-|---|---|---|
-| Claude Code | `~/.claude/skills/asta-skill` | `.claude/skills/asta-skill` |
-| Codex | `~/.codex/skills/asta-skill` | — |
-| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill` | `skills/asta-skill` |
-| pi-mono | `~/.pimo/skills/asta-skill` | — |
 
 ### SkillsMP CLI
 
