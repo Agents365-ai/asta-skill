@@ -191,36 +191,6 @@ After registering the MCP server and restarting your host, ask:
 
 A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al., with TLDR.
 
-## FAQ
-
-### Why do I need this skill if Asta is already an MCP server?
-
-The MCP server gives your agent raw **tools** (function names + parameter schemas). The skill gives your agent the **expertise** to use them well. Without the skill, the agent must figure everything out from scratch each session:
-
-| Layer | What it provides |
-|-------|-----------------|
-| **MCP server** | 8 callable tools with input/output schemas |
-| **This skill** | Intent routing, safe defaults, workflow patterns, pitfall warnings |
-
-Concretely, the skill adds:
-
-1. **Intent → tool mapping** — which of the 8 tools to call for "find papers about X" vs. "who cited paper Y"
-2. **Context-overflow protection** — warns agents to never request `fields=citations` (a single high-citation paper returns 200k+ characters)
-3. **Multi-step workflow patterns** — topic discovery, seed-paper expansion, author deep-dive, evidence retrieval
-4. **Parallel batching guidance** — prefer `get_paper_batch` over N sequential `get_paper` calls
-5. **Safe `fields` defaults** — curated field list that prevents context blowups
-6. **Consistent output formatting** — tables, counts, follow-up menus
-
-Think of it like API documentation vs. the API itself: the schema tells the agent *what's possible*, the skill tells it *what's wise*.
-
-## Known Limitations
-
-- **`fields=citations` / `fields=references` blows up context** — a single highly-cited paper returns 200k+ characters. Use the dedicated `get_citations` tool (which paginates) instead. The SKILL.md warns against this explicitly.
-- **API key required for production use** — unauthenticated access hits strict rate limits fast
-- **Author disambiguation** — common names collide; always inspect affiliations in `search_authors_by_name` before calling `get_author_papers`
-- **MCP loads at session start** — if you register the server mid-session, restart your host to pick up the new tools
-- **Abstract availability** — not every paper in the corpus has a full abstract; use `snippet_search` or `tldr` as fallback
-
 ## Contributing
 
 Suggestions, bug reports, and pull requests are all welcome! If you have ideas to improve this skill — new workflow patterns, better defaults, additional MCP host recipes, documentation fixes, or anything else — feel free to [open an issue](https://github.com/Agents365-ai/asta-skill/issues) or submit a PR directly.

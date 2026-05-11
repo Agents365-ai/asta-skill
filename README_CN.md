@@ -191,36 +191,6 @@ skills install asta-skill
 
 成功调用应返回 *Attention Is All You Need*,NeurIPS 2017,Vaswani 等人,含 TLDR。
 
-## 常见问题
-
-### Asta 本身就是 MCP server，为什么还需要这个 skill？
-
-MCP server 给 agent 提供的是原始**工具**（函数名 + 参数 schema）。Skill 给 agent 提供的是正确使用这些工具的**领域知识**。没有 skill，agent 每次会话都要从零开始摸索：
-
-| 层级 | 提供的内容 |
-|------|-----------|
-| **MCP server** | 8 个可调用的工具及其输入输出 schema |
-| **本技能** | 意图路由、安全默认值、工作流模板、陷阱警告 |
-
-具体来说，skill 额外提供了：
-
-1. **意图 → 工具映射** —— 用户说"搜某主题的论文"和"谁引用了这篇"该调哪个工具
-2. **上下文溢出保护** —— 警告 agent 永远不要请求 `fields=citations`（一篇高被引论文返回 20 万+字符）
-3. **多步工作流模板** —— 主题发现、种子论文扩展、作者深挖、证据检索
-4. **并行批处理指导** —— 优先用 `get_paper_batch` 而非 N 次串行 `get_paper`
-5. **安全的 `fields` 默认值** —— 精选字段列表，防止上下文爆炸
-6. **统一的输出格式** —— 表格、计数、后续操作菜单
-
-类比：API 文档 vs. API 本身 —— schema 告诉 agent **能做什么**，skill 告诉它**怎么做才聪明**。
-
-## 已知限制
-
-- **`fields=citations` / `fields=references` 会炸上下文** —— 一篇高被引论文的返回可达 20 万字符。请改用 `get_citations` 工具(分页)。SKILL.md 中已明确警告
-- **生产使用必须配 API key** —— 未认证访问的速率限制非常严格
-- **作者消歧** —— 常见姓名会重名,调用 `get_author_papers` 前务必先用 `search_authors_by_name` 核对单位
-- **MCP 在会话启动时加载** —— 会话中途注册 server 后必须重启 host 才能看到工具
-- **摘要不一定有** —— 并非所有论文都有完整摘要;可用 `snippet_search` 或 `tldr` 作为 fallback
-
 ## 参与贡献
 
 欢迎提建议、报 bug、提 PR！无论是新的工作流模板、更好的默认配置、更多 MCP 主机的安装方法、文档修正，还是其他任何改进想法，都可以直接 [提 Issue](https://github.com/Agents365-ai/asta-skill/issues) 或提交 Pull Request。
