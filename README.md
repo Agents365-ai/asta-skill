@@ -108,67 +108,36 @@ Use a **tool-calling-capable** local model (e.g. Qwen2.5-Instruct, Llama 3.1 Ins
 
 ## Skill Installation
 
-The skill body lives at `skills/asta-skill/SKILL.md` inside this repo, so installs are now a clone-then-copy. The easiest path is the plugin marketplace.
+The skill body lives at `skills/asta-skill/SKILL.md`. The easiest path is the plugin marketplace.
 
-### Plugin marketplace (recommended for Claude Code)
+### Plugin marketplace (recommended, Claude Code)
 
 ```text
 /plugin marketplace add Agents365-ai/365-skills
 /plugin install asta
 ```
 
-### Claude Code (manual clone)
+### Manual clone (any host)
 
 ```bash
-# Global (available in all projects)
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill ~/.claude/skills/asta-skill
-
-# Project-level
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill .claude/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
+cp -r /tmp/asta-skill/skills/asta-skill <TARGET>
 ```
 
-### Codex
+Pick `<TARGET>` for your host:
 
-```bash
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill ~/.codex/skills/asta-skill
-```
+| Host | Global | Project |
+|---|---|---|
+| Claude Code | `~/.claude/skills/asta-skill` | `.claude/skills/asta-skill` |
+| Codex | `~/.codex/skills/asta-skill` | — |
+| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill` | `skills/asta-skill` |
+| pi-mono | `~/.pimo/skills/asta-skill` | — |
 
-### OpenClaw/ClawHub
-
-```bash
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill ~/.openclaw/skills/asta-skill
-
-# Project-level
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill skills/asta-skill
-```
-
-### pi-mono
-
-```bash
-git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
-  cp -r /tmp/asta-skill/skills/asta-skill ~/.pimo/skills/asta-skill
-```
-
-### SkillsMP
+### SkillsMP CLI
 
 ```bash
 skills install asta-skill
 ```
-
-### Installation paths summary
-
-| Platform | Global path | Project path |
-|----------|-------------|--------------|
-| Claude Code | `~/.claude/skills/asta-skill/` | `.claude/skills/asta-skill/` |
-| Codex | `~/.codex/skills/asta-skill/` | N/A |
-| OpenClaw/ClawHub | `~/.openclaw/skills/asta-skill/` | `skills/asta-skill/` |
-| pi-mono | `~/.pimo/skills/asta-skill/` | — |
-| SkillsMP | N/A (installed via CLI) | N/A |
 
 ## Usage
 
