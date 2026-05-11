@@ -183,26 +183,6 @@ What happens under the hood:
 
 ![paper-fetch batch download](docs/images/asta-paper-fetch.png)
 
-## Available Asta Tools
-
-| Tool | Purpose |
-|---|---|
-| `get_paper` | Single-paper lookup by any supported ID |
-| `get_paper_batch` | Batch lookup of multiple IDs in one call |
-| `search_papers_by_relevance` | Broad keyword search with venue + date filters |
-| `search_paper_by_title` | Title-based lookup |
-| `get_citations` | Paginated citation traversal |
-| `search_authors_by_name` | Author profile search |
-| `get_author_papers` | All papers by a given author |
-| `snippet_search` | ~500-word passages from paper bodies |
-
-## Files
-
-- `skills/asta-skill/SKILL.md` — **the only required file**. Loaded by all hosts as the skill instructions.
-- `README.md` — this file (English, displayed on GitHub homepage)
-- `README_CN.md` — Chinese documentation
-- `.github/workflows/sync-365-skills.yml` — auto-syncs `skills/asta-skill/**` into the [365-skills](https://github.com/Agents365-ai/365-skills) marketplace on every push to `main`
-
 ## Verification
 
 After registering the MCP server and restarting your host, ask:

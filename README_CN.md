@@ -183,26 +183,6 @@ skills install asta-skill
 
 ![paper-fetch 批量下载](docs/images/asta-paper-fetch.png)
 
-## Asta 提供的工具
-
-| 工具 | 用途 |
-|---|---|
-| `get_paper` | 按任意支持的 ID 查单篇论文 |
-| `get_paper_batch` | 一次批量查询多篇论文 |
-| `search_papers_by_relevance` | 关键词宽泛搜索,支持 venue + 日期过滤 |
-| `search_paper_by_title` | 按标题查找 |
-| `get_citations` | 分页式引用遍历 |
-| `search_authors_by_name` | 作者资料搜索 |
-| `get_author_papers` | 查作者的全部论文 |
-| `snippet_search` | 从论文正文检索 ~500 词段落 |
-
-## 文件
-
-- `skills/asta-skill/SKILL.md` —— **唯一必需文件**。所有 host 都以此作为技能指令加载
-- `README.md` —— 英文文档(GitHub 主页显示)
-- `README_CN.md` —— 本文件(中文文档)
-- `.github/workflows/sync-365-skills.yml` —— 每次推送到 `main` 时,自动把 `skills/asta-skill/**` 同步到 [365-skills](https://github.com/Agents365-ai/365-skills) 插件市场
-
 ## 验证
 
 注册好 MCP server 并重启 host 后,向 agent 提问:
