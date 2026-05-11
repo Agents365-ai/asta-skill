@@ -110,12 +110,18 @@ Use a **tool-calling-capable** local model (e.g. Qwen2.5-Instruct, Llama 3.1 Ins
 
 The skill body lives at `skills/asta-skill/SKILL.md`. The easiest path is the plugin marketplace.
 
-### Plugin marketplace (recommended, Claude Code)
+### Plugin marketplace (recommended)
 
-```text
+```bash
+# Any agent (Claude Code, Cursor, Copilot, etc.)
+npx skills add Agents365-ai/365-skills -g
+
+# Claude Code only
 /plugin marketplace add Agents365-ai/365-skills
 /plugin install asta
 ```
+
+Also indexed on [SkillsMP](https://skillsmp.com/) and [ClawHub](https://clawhub.ai/) — each handles updates through its own marketplace.
 
 ### Manual clone (any host)
 
