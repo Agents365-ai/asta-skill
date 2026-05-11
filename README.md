@@ -37,14 +37,6 @@ Two steps — register the MCP server first, then drop the skill into your host:
 
 See [USAGE.md](USAGE.md) for natural-language query examples and a chained `asta-skill` + `paper-fetch` walkthrough with screenshots.
 
-## Verification
-
-After registering the MCP server and restarting your host, ask:
-
-> "Use Asta to get the paper ARXIV:1706.03762 with fields title,year,authors,venue,tldr"
-
-A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al., with TLDR.
-
 ## License
 
 MIT

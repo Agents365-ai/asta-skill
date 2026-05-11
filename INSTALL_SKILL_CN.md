@@ -23,3 +23,11 @@ npx skills add Agents365-ai/365-skills -g
 git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
 cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-skill
 ```
+
+## 验证
+
+注册好 MCP server 并重启 host 后,向 agent 提问:
+
+> "用 Asta 查论文 ARXIV:1706.03762,字段要 title,year,authors,venue,tldr"
+
+成功调用应返回 *Attention Is All You Need*,NeurIPS 2017,Vaswani 等人,含 TLDR。

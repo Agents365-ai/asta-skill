@@ -23,3 +23,11 @@ Also indexed on [SkillsMP](https://skillsmp.com/) and [ClawHub](https://clawhub.
 git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
 cp -r /tmp/asta-skill/skills/asta-skill <your-host's-skills-dir>/asta-skill
 ```
+
+## Verification
+
+After registering the MCP server and restarting your host, ask:
+
+> "Use Asta to get the paper ARXIV:1706.03762 with fields title,year,authors,venue,tldr"
+
+A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al., with TLDR.

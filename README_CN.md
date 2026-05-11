@@ -37,14 +37,6 @@
 
 参见 [USAGE_CN.md](USAGE_CN.md) —— 包含自然语言查询示例,以及 `asta-skill` + `paper-fetch` 联用的完整流程演示(含截图)。
 
-## 验证
-
-注册好 MCP server 并重启 host 后,向 agent 提问:
-
-> "用 Asta 查论文 ARXIV:1706.03762,字段要 title,year,authors,venue,tldr"
-
-成功调用应返回 *Attention Is All You Need*,NeurIPS 2017,Vaswani 等人,含 TLDR。
-
 ## License
 
 MIT
