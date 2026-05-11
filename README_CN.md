@@ -164,6 +164,17 @@ cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-ski
 
 MIT
 
+## 社区
+
+加入交流群获取帮助、提问和最新动态:
+
+- **Discord:** https://discord.gg/79JF5Atuk
+- **微信:** 扫描下方二维码
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Agents365-ai/images_payment/main/qrcode/agents365ai_wechat_1.png" width="200" alt="微信交流群">
+</p>
+
 ## 支持
 
 如果这个技能对你有帮助,欢迎打赏支持作者:

@@ -164,6 +164,17 @@ A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et 
 
 MIT
 
+## Community
+
+Join us for help, Q&A, and updates:
+
+- **Discord:** https://discord.gg/79JF5Atuk
+- **WeChat:** scan the QR code below
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Agents365-ai/images_payment/main/qrcode/agents365ai_wechat_1.png" width="200" alt="WeChat Community Group">
+</p>
+
 ## Support
 
 If this skill helps you, consider supporting the author:
