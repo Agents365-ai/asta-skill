@@ -130,12 +130,6 @@ git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
 cp -r /tmp/asta-skill/skills/asta-skill <your-host's-skills-dir>/asta-skill
 ```
 
-### SkillsMP CLI
-
-```bash
-skills install asta-skill
-```
-
 ## Usage
 
 Just describe what you want:

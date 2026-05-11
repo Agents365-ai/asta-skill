@@ -130,12 +130,6 @@ git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
 cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-skill
 ```
 
-### SkillsMP CLI
-
-```bash
-skills install asta-skill
-```
-
 ## 使用方式
 
 直接用自然语言描述需求即可:
