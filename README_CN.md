@@ -197,12 +197,6 @@ skills install asta-skill
 
 成功调用应返回 *Attention Is All You Need*,NeurIPS 2017,Vaswani 等人,含 TLDR。
 
-## 参与贡献
-
-欢迎提建议、报 bug、提 PR！无论是新的工作流模板、更好的默认配置、更多 MCP 主机的安装方法、文档修正，还是其他任何改进想法，都可以直接 [提 Issue](https://github.com/Agents365-ai/asta-skill/issues) 或提交 Pull Request。
-
-每一份贡献，不论大小，都能让这个技能变得更好。
-
 ## License
 
 MIT

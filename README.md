@@ -197,12 +197,6 @@ After registering the MCP server and restarting your host, ask:
 
 A successful call returns *Attention Is All You Need*, NeurIPS 2017, Vaswani et al., with TLDR.
 
-## Contributing
-
-Suggestions, bug reports, and pull requests are all welcome! If you have ideas to improve this skill — new workflow patterns, better defaults, additional MCP host recipes, documentation fixes, or anything else — feel free to [open an issue](https://github.com/Agents365-ai/asta-skill/issues) or submit a PR directly.
-
-This skill is community-friendly: every contribution, no matter how small, helps make it better for everyone.
-
 ## License
 
 MIT
