@@ -15,18 +15,7 @@
 
 ## 多平台支持
 
-兼容所有支持 MCP 以及 [Agent Skills](https://agentskills.io) 格式的 AI 编程助手:
-
-| 平台 | 状态 | 说明 |
-|------|------|------|
-| **Claude Code** | ✅ 完全支持 | 原生 SKILL.md + `claude mcp add` 注册 |
-| **Codex** | ✅ 完全支持 | 在 `~/.codex/config.toml` 中配置 MCP |
-| **Cursor / Windsurf / Hermes** | ✅ 完全支持 | 标准 `mcpServers` JSON 配置 |
-| **opencode** | ✅ 完全支持 | 原生 skills + `~/.config/opencode/opencode.json` 配置 MCP |
-| **OpenClaw/ClawHub** | ✅ 完全支持 | `metadata.openclaw` 命名空间 + MCP 配置 |
-| **[pi-mono](https://github.com/badlogic/pi-mono)** | ✅ 完全支持 | `metadata.pimo` 命名空间 |
-| **SkillsMP** | ✅ 已收录 | GitHub topics 已配置 |
-| **LM Studio** | ⚠️ 手动支持 | 0.3.17+ 可用 MCP 工具;skill 指令需手动粘贴到 System Prompt |
+兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见下方 [LM Studio(手动模式)](#lm-studio手动模式))。
 
 ## 对比
 

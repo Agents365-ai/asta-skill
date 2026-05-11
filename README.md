@@ -15,18 +15,7 @@
 
 ## Multi-Platform Support
 
-Works with any agent that speaks MCP and any host that loads [Agent Skills](https://agentskills.io):
-
-| Platform | Status | Details |
-|----------|--------|---------|
-| **Claude Code** | ✅ Full support | Native SKILL.md + `claude mcp add` registration |
-| **Codex** | ✅ Full support | MCP entry in `~/.codex/config.toml` |
-| **Cursor / Windsurf / Hermes** | ✅ Full support | Standard `mcpServers` JSON block |
-| **opencode** | ✅ Full support | Native skills + MCP in `~/.config/opencode/opencode.json` |
-| **OpenClaw/ClawHub** | ✅ Full support | `metadata.openclaw` namespace + MCP config |
-| **[pi-mono](https://github.com/badlogic/pi-mono)** | ✅ Full support | `metadata.pimo` namespace |
-| **SkillsMP** | ✅ Indexed | GitHub topics configured |
-| **LM Studio** | ⚠️ Manual | MCP tools work (0.3.17+); skill instructions must be pasted into the system prompt |
+Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](#lm-studio-manual-mode) below).
 
 ## Comparison
 
