@@ -113,41 +113,56 @@ LM Studio (0.3.17+) speaks MCP but does not auto-discover Agent Skills. Use it i
     }
     ```
 
-2. **Paste the skill instructions** — copy the body of [`SKILL.md`](SKILL.md) into the chat's System Prompt so the model follows the intent routing and safe defaults.
+2. **Paste the skill instructions** — copy the body of [`skills/asta-skill/SKILL.md`](skills/asta-skill/SKILL.md) into the chat's System Prompt so the model follows the intent routing and safe defaults.
 
 Use a **tool-calling-capable** local model (e.g. Qwen2.5-Instruct, Llama 3.1 Instruct, Mistral Nemo, GPT-OSS). Plain chat models cannot invoke MCP tools.
 
 ## Skill Installation
 
-### Claude Code
+The skill body lives at `skills/asta-skill/SKILL.md` inside this repo, so installs are now a clone-then-copy. The easiest path is the plugin marketplace.
+
+### Plugin marketplace (recommended for Claude Code)
+
+```text
+/plugin marketplace add Agents365-ai/365-skills
+/plugin install asta
+```
+
+### Claude Code (manual clone)
 
 ```bash
 # Global (available in all projects)
-git clone https://github.com/Agents365-ai/asta-skill.git ~/.claude/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill ~/.claude/skills/asta-skill
 
 # Project-level
-git clone https://github.com/Agents365-ai/asta-skill.git .claude/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill .claude/skills/asta-skill
 ```
 
 ### Codex
 
 ```bash
-git clone https://github.com/Agents365-ai/asta-skill.git ~/.codex/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill ~/.codex/skills/asta-skill
 ```
 
 ### OpenClaw/ClawHub
 
 ```bash
-git clone https://github.com/Agents365-ai/asta-skill.git ~/.openclaw/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill ~/.openclaw/skills/asta-skill
 
 # Project-level
-git clone https://github.com/Agents365-ai/asta-skill.git skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill skills/asta-skill
 ```
 
 ### pi-mono
 
 ```bash
-git clone https://github.com/Agents365-ai/asta-skill.git ~/.pimo/skills/asta-skill
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill && \
+  cp -r /tmp/asta-skill/skills/asta-skill ~/.pimo/skills/asta-skill
 ```
 
 ### SkillsMP
@@ -225,9 +240,10 @@ What happens under the hood:
 
 ## Files
 
-- `SKILL.md` — **the only required file**. Loaded by all hosts as the skill instructions.
+- `skills/asta-skill/SKILL.md` — **the only required file**. Loaded by all hosts as the skill instructions.
 - `README.md` — this file (English, displayed on GitHub homepage)
 - `README_CN.md` — Chinese documentation
+- `.github/workflows/sync-365-skills.yml` — auto-syncs `skills/asta-skill/**` into the [365-skills](https://github.com/Agents365-ai/365-skills) marketplace on every push to `main`
 
 ## Verification
 
