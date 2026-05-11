@@ -17,28 +17,6 @@
 
 Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](#lm-studio-manual-mode) below).
 
-## Comparison
-
-### vs. `semanticscholar-skill` (our REST-based sibling)
-
-| Capability | `semanticscholar-skill` | `asta-skill` |
-|---|---|---|
-| Transport | Python + direct REST (`s2.py`) | MCP (streamable HTTP) |
-| Host requirement | Python + `S2_API_KEY` | Host with MCP support |
-| Auth variable | `S2_API_KEY` | `ASTA_API_KEY` (via `x-api-key`) |
-| Best for | Scripted batch workflows, custom filters | Zero-code agent integration |
-| Works in Cursor / Windsurf out of the box | ❌ | ✅ |
-
-### vs. no skill (native agent)
-
-| Feature | Native agent | This skill |
-|---|---|---|
-| Knows Asta endpoint & `x-api-key` header | ❌ | ✅ |
-| Intent → tool decision table | ❌ | ✅ |
-| Workflow patterns (discovery / seed expansion / author / evidence) | ❌ | ✅ |
-| Warns against context-blowing `fields=citations` | ❌ | ✅ |
-| Install recipes for every MCP host | ❌ | ✅ |
-
 ## Prerequisites
 
 - An agent host with MCP support (Claude Code, Codex, Cursor, Windsurf, opencode, OpenClaw/ClawHub, pi-mono, etc.)

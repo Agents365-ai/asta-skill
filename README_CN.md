@@ -17,28 +17,6 @@
 
 兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见下方 [LM Studio(手动模式)](#lm-studio手动模式))。
 
-## 对比
-
-### vs. `semanticscholar-skill`(REST 版姊妹技能)
-
-| 能力 | `semanticscholar-skill` | `asta-skill` |
-|---|---|---|
-| 传输方式 | Python + 直连 REST(`s2.py`) | MCP(streamable HTTP) |
-| 运行依赖 | Python + `S2_API_KEY` | Host 支持 MCP 即可 |
-| 认证变量 | `S2_API_KEY` | `ASTA_API_KEY`(`x-api-key` 头) |
-| 最佳场景 | 脚本化批处理、复杂过滤 | 零代码 agent 集成 |
-| Cursor / Windsurf 开箱即用 | ❌ | ✅ |
-
-### vs. 原生 Agent(无技能)
-
-| 能力 | 原生 Agent | 本技能 |
-|---|---|---|
-| 知道 Asta 端点和 `x-api-key` 头 | ❌ | ✅ |
-| 意图 → 工具决策表 | ❌ | ✅ |
-| 工作流模板(发现 / 种子扩展 / 作者 / 证据) | ❌ | ✅ |
-| 警告避免 `fields=citations` 炸上下文 | ❌ | ✅ |
-| 各 MCP host 安装配方 | ❌ | ✅ |
-
 ## 前置条件
 
 - 任意支持 MCP 的 agent host(Claude Code、Codex、Cursor、Windsurf、opencode、OpenClaw/ClawHub、pi-mono 等)
