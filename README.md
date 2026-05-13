@@ -15,7 +15,7 @@
 
 ## Multi-Platform Support
 
-Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](INSTALL_MCP.md#lm-studio-manual-mode) in the install guide).
+Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](docs/INSTALL_MCP.md#lm-studio-manual-mode) in the install guide).
 
 ## Prerequisites
 
@@ -30,12 +30,12 @@ Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.i
 
 Two steps — register the MCP server first, then drop the skill into your host:
 
-1. **[Register the Asta MCP server](INSTALL_MCP.md)** — per-host recipes for Claude Code, Codex, Cursor / Windsurf / Hermes, and LM Studio.
-2. **[Install the skill](INSTALL_SKILL.md)** — plugin marketplace (recommended) or manual clone.
+1. **[Register the Asta MCP server](docs/INSTALL_MCP.md)** — per-host recipes for Claude Code, Codex, Cursor / Windsurf / Hermes, and LM Studio.
+2. **[Install the skill](docs/INSTALL_SKILL.md)** — plugin marketplace (recommended) or manual clone.
 
 ## Usage
 
-See [USAGE.md](USAGE.md) for natural-language query examples and a chained `asta-skill` + `paper-fetch` walkthrough with screenshots.
+See [USAGE.md](docs/USAGE.md) for natural-language query examples and a chained `asta-skill` + `paper-fetch` walkthrough with screenshots.
 
 ## Community
 

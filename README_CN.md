@@ -15,7 +15,7 @@
 
 ## 多平台支持
 
-兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见安装指南中的 [LM Studio(手动模式)](INSTALL_MCP_CN.md#lm-studio手动模式))。
+兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见安装指南中的 [LM Studio(手动模式)](docs/INSTALL_MCP_CN.md#lm-studio手动模式))。
 
 ## 前置条件
 
@@ -30,12 +30,12 @@
 
 两步 —— 先注册 MCP server,再把技能加载到 host:
 
-1. **[注册 Asta MCP server](INSTALL_MCP_CN.md)** —— Claude Code、Codex、Cursor / Windsurf / Hermes、LM Studio 各 host 的具体配方。
-2. **[安装技能](INSTALL_SKILL_CN.md)** —— 插件市场(推荐)或手动克隆。
+1. **[注册 Asta MCP server](docs/INSTALL_MCP_CN.md)** —— Claude Code、Codex、Cursor / Windsurf / Hermes、LM Studio 各 host 的具体配方。
+2. **[安装技能](docs/INSTALL_SKILL_CN.md)** —— 插件市场(推荐)或手动克隆。
 
 ## 使用方式
 
-参见 [USAGE_CN.md](USAGE_CN.md) —— 包含自然语言查询示例,以及 `asta-skill` + `paper-fetch` 联用的完整流程演示(含截图)。
+参见 [USAGE_CN.md](docs/USAGE_CN.md) —— 包含自然语言查询示例,以及 `asta-skill` + `paper-fetch` 联用的完整流程演示(含截图)。
 
 ## 社区
 
