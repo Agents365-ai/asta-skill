@@ -29,7 +29,7 @@
 
 ## 多平台支持
 
-兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见安装指南中的 [LM Studio(手动模式)](docs/INSTALL_MCP_CN.md#lm-studio手动模式))。
+兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见下方 [LM Studio(手动模式)](#lm-studio手动模式))。
 
 ## 前置条件
 
@@ -42,14 +42,141 @@
 
 ## 安装
 
-两步 —— 先注册 MCP server,再把技能加载到 host:
+两步 —— 先注册 MCP server,再把技能加载到 host。
 
-1. **[注册 Asta MCP server](docs/INSTALL_MCP_CN.md)** —— Claude Code、Codex、Cursor / Windsurf / Hermes、LM Studio 各 host 的具体配方。
-2. **[安装技能](docs/INSTALL_SKILL_CN.md)** —— 插件市场(推荐)或手动克隆。
+### 第 1 步：注册 Asta MCP 服务器
+
+**先**注册 Asta MCP server,再安装技能本体。
+
+#### Claude Code
+
+```bash
+claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
+  -H "x-api-key: $ASTA_API_KEY"
+```
+
+然后重启 Claude Code,MCP 工具会在会话启动时加载。
+
+#### Codex CLI
+
+编辑 `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.asta]
+type = "http"
+url = "https://asta-tools.allen.ai/mcp/v1"
+headers = { "x-api-key" = "${ASTA_API_KEY}" }
+```
+
+#### Cursor / Windsurf / Hermes / 其他 MCP 客户端
+
+```json
+{
+  "mcpServers": {
+    "asta": {
+      "serverUrl": "https://asta-tools.allen.ai/mcp/v1",
+      "headers": { "x-api-key": "<YOUR_API_KEY>" }
+    }
+  }
+}
+```
+
+#### LM Studio(手动模式)
+
+LM Studio(0.3.17+)已支持 MCP,但不会自动加载 Agent Skills。两步即可使用:
+
+1. **注册 MCP server** —— App Settings → Program → Integrations → 编辑 `mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "asta": {
+          "url": "https://asta-tools.allen.ai/mcp/v1",
+          "headers": { "x-api-key": "YOUR_ASTA_API_KEY" }
+        }
+      }
+    }
+    ```
+
+2. **手动注入技能指令** —— 把 [`skills/asta-skill/SKILL.md`](skills/asta-skill/SKILL.md) 的正文复制到聊天的 System Prompt,让模型按意图路由表和安全默认值调用工具。
+
+需使用**支持 function calling 的本地模型**(如 Qwen2.5-Instruct、Llama 3.1 Instruct、Mistral Nemo、GPT-OSS),纯 chat 模型无法调用 MCP 工具。
+
+### 第 2 步：安装技能
+
+技能正文位于仓库内的 `skills/asta-skill/SKILL.md`。最简单的安装方式是通过插件市场。
+
+#### 插件市场(推荐)
+
+```bash
+# 任意 agent(Claude Code、Cursor、Copilot 等)
+npx skills add Agents365-ai/365-skills -g
+
+# 仅 Claude Code
+/plugin marketplace add Agents365-ai/365-skills
+/plugin install asta
+```
+
+同时收录于 [SkillsMP](https://skillsmp.com/) 与 [ClawHub](https://clawhub.ai/) —— 各自通过自己的市场处理更新。
+
+#### 手动克隆(任意 host)
+
+```bash
+git clone https://github.com/Agents365-ai/asta-skill.git /tmp/asta-skill
+cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-skill
+```
+
+### 验证
+
+注册好 MCP server、安装好技能并重启 host 后,向 agent 提问:
+
+> "用 Asta 查论文 ARXIV:1706.03762,字段要 title,year,authors,venue,tldr"
+
+成功调用应返回 *Attention Is All You Need*,NeurIPS 2017,Vaswani 等人,含 TLDR。
 
 ## 使用方式
 
-参见 [USAGE_CN.md](docs/USAGE_CN.md) —— 包含自然语言查询示例,以及 `asta-skill` + `paper-fetch` 联用的完整流程演示(含截图)。
+直接用自然语言描述需求即可:
+
+```
+> 用 Asta 查一下 DOI 10.48550/arXiv.1706.03762 这篇论文
+
+> 在 Asta 上搜索 2023 年以来 NeurIPS 的 mixture-of-experts 论文
+
+> "Attention Is All You Need" 被哪些论文引用?按引用数排前 20
+
+> 在 Asta 语料库中查找提到 "flash attention latency" 的段落
+
+> 在 Asta 上找 Yann LeCun,列出他 2024 年的论文
+```
+
+技能会选对 Asta 工具、附上安全的 `fields` 参数,并遵循文档中的工作流模板。
+
+### 示例：检索 + 批量下载（与 `paper-fetch` 联用）
+
+`asta-skill` 只负责**检索和元数据获取**,不下载 PDF。如果要从搜索结果直接拿到本地 PDF,可与 `paper-fetch` 技能(或任意基于 DOI 的下载工具)串联使用:
+
+```
+> 用 Asta 检索 2022 年以来 "single-cell ATAC-seq batch correction" 引用最高的 5 篇论文,
+  然后把 DOI 交给 paper-fetch 批量下载到 ./papers/ 目录
+```
+
+底层流程:
+
+1. **asta-skill** → 调用 `search_papers_by_relevance`,参数 `publication_date_range="2022:"`,`fields=title,year,authors,venue,tldr,externalIds`(注意带上 `externalIds` 才能拿到 DOI)
+2. Agent 从结果中提取 `externalIds.DOI`；没有 DOI 时回退到 `externalIds.ArXiv`
+3. **paper-fetch** → 批量按 Unpaywall → arXiv → bioRxiv/medRxiv → PMC → SS → Sci-Hub 顺序解析每个 DOI/arXiv ID
+4. PDF 落到 `./papers/`,每篇一个文件
+
+`paper-fetch` 是独立技能,需要下载能力时单独安装。`asta-skill` 本身职责仅限 Semantic Scholar 语料。
+
+**Step 1 — Asta 返回 Top 5 论文(含 DOI)：**
+
+![Asta 检索结果](assets/asta-search.png)
+
+**Step 2 — paper-fetch 把 5 篇 PDF 全部下载到 `./papers/`：**
+
+![paper-fetch 批量下载](assets/asta-paper-fetch.png)
 
 ## 🔗 相关技能
 
