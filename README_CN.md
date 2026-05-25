@@ -187,8 +187,6 @@ cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-ski
 | [semanticscholar-skill](https://github.com/Agents365-ai/semanticscholar-skill) | 直连 Semantic Scholar API(Python) | 无法使用 MCP,或更想脚本化访问时 |
 | [paper-fetch](https://github.com/Agents365-ai/paper-fetch) | DOI → PDF,7 源回退 | 找到引用后需要全文时 |
 | [scholar-deep-research](https://github.com/Agents365-ai/scholar-deep-research) | 8 阶段文献综述流水线 | 用户需要结构化、带引用的综述报告时 |
-| [zotero-research-assistant](https://github.com/Agents365-ai/zotero-research-assistant) | Zotero 文献库工作流 | 文献需要进入 Zotero 时 |
-
 ## 💬 社区
 
 加入交流群获取帮助、提问和最新动态:
