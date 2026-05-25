@@ -172,11 +172,11 @@ cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-ski
 
 **Step 1 — Asta 返回 Top 5 论文(含 DOI)：**
 
-![Asta 检索结果](assets/asta-search.png)
+![Asta 检索结果](docs/assets/asta-search.png)
 
 **Step 2 — paper-fetch 把 5 篇 PDF 全部下载到 `./papers/`：**
 
-![paper-fetch 批量下载](assets/asta-paper-fetch.png)
+![paper-fetch 批量下载](docs/assets/asta-paper-fetch.png)
 
 ## 🔗 相关技能
 

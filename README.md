@@ -172,11 +172,11 @@ What happens under the hood:
 
 **Step 1 — Asta returns the top 5 papers with DOIs:**
 
-![Asta search result](assets/asta-search.png)
+![Asta search result](docs/assets/asta-search.png)
 
 **Step 2 — paper-fetch downloads all 5 PDFs into `./papers/`:**
 
-![paper-fetch batch download](assets/asta-paper-fetch.png)
+![paper-fetch batch download](docs/assets/asta-paper-fetch.png)
 
 ## 🔗 Related Skills
 
