@@ -187,8 +187,6 @@ Part of the [Agents365-ai research-skill family](https://github.com/Agents365-ai
 | [semanticscholar-skill](https://github.com/Agents365-ai/semanticscholar-skill) | Direct Semantic Scholar API (Python) | When MCP isn't available or you prefer scripted access |
 | [paper-fetch](https://github.com/Agents365-ai/paper-fetch) | DOI → PDF, 7-source fallback | When you need full text after finding citations |
 | [scholar-deep-research](https://github.com/Agents365-ai/scholar-deep-research) | 8-phase literature review pipeline | When the user wants a structured cited report |
-| [zotero-research-assistant](https://github.com/Agents365-ai/zotero-research-assistant) | Zotero library workflows | When references go into Zotero |
-
 ## 💬 Community
 
 Join us for help, Q&A, and updates:
