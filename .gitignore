@@ -5,3 +5,4 @@ __pycache__/
 logs/
 .last_version_check
 papers/
+.claude/settings.local.json
