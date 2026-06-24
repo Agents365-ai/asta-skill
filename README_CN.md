@@ -63,10 +63,11 @@ claude mcp add -t http -s user asta https://asta-tools.allen.ai/mcp/v1 \
 
 ```toml
 [mcp_servers.asta]
-type = "http"
 url = "https://asta-tools.allen.ai/mcp/v1"
-headers = { "x-api-key" = "${ASTA_API_KEY}" }
+env_http_headers = { "x-api-key" = "ASTA_API_KEY" }
 ```
+
+Codex 通过 `url` 自动识别 streamable HTTP。`env_http_headers` 把请求头名称映射到**读取其值的环境变量名** —— 所以需在 shell 中 export `ASTA_API_KEY`。若想直接写死 key,改用 `http_headers = { "x-api-key" = "<YOUR_API_KEY>" }`。
 
 #### Cursor / Windsurf / Hermes / 其他 MCP 客户端
 

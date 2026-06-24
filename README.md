@@ -63,10 +63,11 @@ Edit `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.asta]
-type = "http"
 url = "https://asta-tools.allen.ai/mcp/v1"
-headers = { "x-api-key" = "${ASTA_API_KEY}" }
+env_http_headers = { "x-api-key" = "ASTA_API_KEY" }
 ```
+
+Codex infers streamable HTTP from `url`. `env_http_headers` maps the header name to the **env var name** to read its value from — so export `ASTA_API_KEY` in your shell. For a hardcoded key instead, use `http_headers = { "x-api-key" = "<YOUR_API_KEY>" }`.
 
 #### Cursor / Windsurf / Hermes / other MCP clients
 
