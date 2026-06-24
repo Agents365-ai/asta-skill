@@ -192,7 +192,7 @@ cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-ski
 
 1. **asta-skill** → 调用 `search_papers_by_relevance`,参数 `publication_date_range="2022:"`,`fields=title,year,authors,venue,tldr,externalIds`(注意带上 `externalIds` 才能拿到 DOI)
 2. Agent 从结果中提取 `externalIds.DOI`；没有 DOI 时回退到 `externalIds.ArXiv`
-3. **paper-fetch** → 批量按 Unpaywall → arXiv → bioRxiv/medRxiv → PMC → SS → Sci-Hub 顺序解析每个 DOI/arXiv ID
+3. **paper-fetch** → 批量按 Unpaywall → Semantic Scholar → arXiv → PubMed Central → bioRxiv/medRxiv → publisher-direct → Sci-Hub 顺序解析每个 DOI/arXiv ID
 4. PDF 落到 `./papers/`,每篇一个文件
 
 `paper-fetch` 是独立技能,需要下载能力时单独安装。`asta-skill` 本身职责仅限 Semantic Scholar 语料。
@@ -214,6 +214,7 @@ cp -r /tmp/asta-skill/skills/asta-skill <你的-host-的-skills-目录>/asta-ski
 | [semanticscholar-skill](https://github.com/Agents365-ai/semanticscholar-skill) | 直连 Semantic Scholar API(Python) | 无法使用 MCP,或更想脚本化访问时 |
 | [paper-fetch](https://github.com/Agents365-ai/paper-fetch) | DOI → PDF,7 源回退 | 找到引用后需要全文时 |
 | [scholar-deep-research](https://github.com/Agents365-ai/scholar-deep-research) | 8 阶段文献综述流水线 | 用户需要结构化、带引用的综述报告时 |
+
 ## 💬 社区
 
 加入交流群获取帮助、提问和最新动态:
