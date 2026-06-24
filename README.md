@@ -81,6 +81,32 @@ headers = { "x-api-key" = "${ASTA_API_KEY}" }
 }
 ```
 
+#### Claude Desktop
+
+Claude Desktop's built-in **Add custom connector** UI only supports OAuth — it can't attach the `x-api-key` header Asta needs, so a server added there fails to register. Register Asta through the config file using the [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridge instead (requires [Node.js](https://nodejs.org)).
+
+Edit `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/`, Windows: `%APPDATA%\Claude\`):
+
+```json
+{
+  "mcpServers": {
+    "asta": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://asta-tools.allen.ai/mcp/v1",
+        "--header",
+        "x-api-key:${ASTA_API_KEY}"
+      ],
+      "env": { "ASTA_API_KEY": "<YOUR_API_KEY>" }
+    }
+  }
+}
+```
+
+Write the header as `x-api-key:${ASTA_API_KEY}` with **no space** after the colon — Claude Desktop splits `--header` args on spaces — and supply the value via `env`. Then fully quit and reopen Claude Desktop. Note that Claude Desktop does not auto-load filesystem Agent Skills: the MCP tools work directly once connected, and to add the skill's intent routing / safe defaults, paste the body of [`skills/asta-skill/SKILL.md`](skills/asta-skill/SKILL.md) into a Project's instructions (same as LM Studio below).
+
 #### LM Studio (manual mode)
 
 LM Studio (0.3.17+) speaks MCP but does not auto-discover Agent Skills. Use it in two steps:
