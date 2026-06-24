@@ -192,7 +192,7 @@ What happens under the hood:
 
 1. **asta-skill** → `search_papers_by_relevance` with `publication_date_range="2022:"` and `fields=title,year,authors,venue,tldr,externalIds` (note `externalIds` to expose DOI)
 2. Agent extracts `externalIds.DOI` for each hit; falls back to `externalIds.ArXiv` when DOI is absent
-3. **paper-fetch** → batch-resolves each DOI/arXiv ID through Unpaywall → arXiv → bioRxiv/medRxiv → PMC → SS → Sci-Hub fallback chain
+3. **paper-fetch** → batch-resolves each DOI/arXiv ID through the Unpaywall → Semantic Scholar → arXiv → PubMed Central → bioRxiv/medRxiv → publisher-direct → Sci-Hub fallback chain
 4. PDFs land in `./papers/`, one per paper
 
 `paper-fetch` is a separate skill — install it if you need download capability. `asta-skill` itself stays scoped to the Semantic Scholar corpus.
@@ -214,6 +214,7 @@ Part of the [Agents365-ai research-skill family](https://github.com/Agents365-ai
 | [semanticscholar-skill](https://github.com/Agents365-ai/semanticscholar-skill) | Direct Semantic Scholar API (Python) | When MCP isn't available or you prefer scripted access |
 | [paper-fetch](https://github.com/Agents365-ai/paper-fetch) | DOI → PDF, 7-source fallback | When you need full text after finding citations |
 | [scholar-deep-research](https://github.com/Agents365-ai/scholar-deep-research) | 8-phase literature review pipeline | When the user wants a structured cited report |
+
 ## 💬 Community
 
 Join us for help, Q&A, and updates:
