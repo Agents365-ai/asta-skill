@@ -31,6 +31,8 @@
 
 兼容所有支持 MCP 并能加载 [Agent Skills](https://agentskills.io) 的 host —— 已在 **Claude Code、Codex、Cursor、Windsurf、Hermes、opencode、OpenClaw/ClawHub、[pi-mono](https://github.com/badlogic/pi-mono)** 上验证,并收录于 **SkillsMP**。**LM Studio**(0.3.17+)支持 MCP 但不自动加载 skills,需手动将 `SKILL.md` 粘贴到 system prompt(见下方 [LM Studio(手动模式)](#lm-studio手动模式))。
 
+`SKILL.md` 的 frontmatter 仅在顶层保留 `name`、`description`、`license`,其余字段全部嵌套在 `metadata` 下,因此能通过 Codex 等更严格的 skill frontmatter 解析器的校验。
+
 ## 前置条件
 
 - 任意支持 MCP 的 agent host(Claude Code、Codex、Cursor、Windsurf、opencode、OpenClaw/ClawHub、pi-mono 等)
