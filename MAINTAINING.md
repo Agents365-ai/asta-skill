@@ -44,6 +44,13 @@ Before tagging a new version, confirm each item against a freshly pulled schema:
 - [ ] **Undocumented pass-through fields** (`externalIds`, `citationCount`,
       `influentialCitationCount`) still return — if a release drops them, update the
       "Retrieving DOI" section to degrade gracefully.
+- [ ] **Field presets still support output rules** — if `SKILL.md` tells agents to
+      rank or display citations, the search/result preset must request
+      `citationCount`; if it tells agents to export/hand off DOIs, the export preset
+      must request `externalIds`.
+- [ ] **Missing-tool fallback is current** — the prerequisite section should point
+      users to the current streamable HTTP endpoint and host config shape, not to a
+      non-existent section or stale install command.
 - [ ] Bump `version` in the `SKILL.md` frontmatter `metadata` block.
 
 ## Live schema snapshot (last verified 2026-06-27)
