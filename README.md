@@ -31,6 +31,8 @@ A pure instruction-pack skill that turns natural-language research questions int
 
 Works on any host that speaks MCP and loads [Agent Skills](https://agentskills.io) — verified on **Claude Code, Codex, Cursor, Windsurf, Hermes, opencode, OpenClaw/ClawHub,** and **[pi-mono](https://github.com/badlogic/pi-mono)**; indexed on **SkillsMP**. **LM Studio** (0.3.17+) supports MCP but does not auto-load skills — paste `SKILL.md` into the system prompt (see [LM Studio (manual mode)](#lm-studio-manual-mode) below).
 
+`SKILL.md`'s frontmatter keeps only `name`, `description`, and `license` at the top level (all other fields are nested under `metadata`), so it validates cleanly under stricter skill-frontmatter parsers such as Codex's.
+
 ## Prerequisites
 
 - An agent host with MCP support (Claude Code, Codex, Cursor, Windsurf, opencode, OpenClaw/ClawHub, pi-mono, etc.)
